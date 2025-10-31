@@ -108,23 +108,3 @@ Battery % → 3.0 V = 0%, 3.7 V = ~50%, 4.2 V = 100%
 
 
 
----
-
-⚠️ Important Notes
-
-1. Ye code sirf 3.7 V single-cell Li-ion ke liye safe hai (5 V se kam).
-
-
-2. Agar aap multi-cell battery (7.4 V / 11.1 V) lagate ho, to voltage divider (R1–R2) lagana zaruri hai.
-
-
-3. Aap V_CALIB_FACTOR ko adjust karke reading fine-tune kar sakte ho
-(e.g., agar multimeter 3.85V dikhata hai aur Arduino 3.80V,
-to V_CALIB_FACTOR = 3.85 / 3.80 = 1.013 set kar lo).
-
-
-
-
----
-
-Chaho to mai iska ek OLED display version ya app-based Bluetooth graph version bhi likh du (live battery % bar ke sath)?
