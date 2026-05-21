@@ -52,24 +52,24 @@ float clampf(float x, float lo, float hi) {
 }
 
 void loop() {
-  // 1️⃣ Read averaged ADC voltage
+  // Read averaged ADC voltage
   float vAtPin = readVoltageAtPin_avg();
 
-  // 2️⃣ Calculate actual battery voltage
+  // Calculate actual battery voltage
   float battVoltage = vAtPin * ((R1 + R2) / R2);
   battVoltage *= V_CALIB_FACTOR;
   battVoltage = clampf(battVoltage, 0.0f, 5.0f);
 
-  // 3️⃣ Calculate battery percentage
+  // Calculate battery percentage
   float percent = ((battVoltage - BATTERY_MIN_VOLTAGE) /
                    (BATTERY_MAX_VOLTAGE - BATTERY_MIN_VOLTAGE)) * 100.0f;
   percent = clampf(percent, 0.0f, 100.0f);
 
-  // 4️⃣ LED indicator — ON if battery > 4V
+  // LED indicator — ON if battery > 4V
   if (battVoltage > 4.0) digitalWrite(LED_PIN, HIGH);
   else digitalWrite(LED_PIN, LOW);
 
-  // 5️⃣ Print to Serial Monitor
+  // Print to Serial Monitor
   Serial.print("ADC Voltage: ");
   Serial.print(vAtPin, 3);
   Serial.print(" V  |  Battery Voltage: ");
@@ -78,7 +78,7 @@ void loop() {
   Serial.print(percent, 1);
   Serial.println(" %");
 
-  // 6️⃣ Send to Bluetooth (HC-05)
+  // Send to Bluetooth (HC-05)
   BT.print("ADC: ");
   BT.print(vAtPin, 2);
   BT.print(" V | Battery: ");
@@ -87,24 +87,12 @@ void loop() {
   BT.print(percent, 0);
   BT.println("%");
 
-  // 🔁 Update every 10 seconds
+  // Update every 10 seconds
   delay(10000);
 }
 
 
----
 
-📊 Output Example (Serial Monitor / Bluetooth)
-
-ADC Voltage: 3.682 V  |  Battery Voltage: 3.682 V  |  Battery: 56.8 %
-
-Yani:
-
-ADC Voltage → A0 pin pe milne wala voltage
-
-Battery Voltage → Actual battery ka voltage
-
-Battery % → 3.0 V = 0%, 3.7 V = ~50%, 4.2 V = 100%
 
 
 
